@@ -1,0 +1,5 @@
+- Git for version control
+- BDD
+- Rspec
+- Rails 5.2.2
+- Ruby 2.4
