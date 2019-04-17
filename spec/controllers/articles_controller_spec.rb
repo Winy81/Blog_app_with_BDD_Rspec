@@ -9,4 +9,12 @@ RSpec.describe ArticlesController, type: :controller do
     end
   end
 
+  describe "Create new Article" do
+  	it "should be passed with dedicated fields" do
+  		@article = Article.create(title:"test",body:"test")
+  		expect(@article).to be_valid
+  	end
+
+  end
+
 end
