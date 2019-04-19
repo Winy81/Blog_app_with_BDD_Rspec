@@ -1,3 +1,14 @@
 <h1>Articles#index</h1>
 
-<%= link_to "New Article" , new_article_path %>
+<%= link_to "New Article" , new_article_path, class:"btn btn-primary btn-lg", id: "new-article-btn" %>
+
+<% @article.each do |article| %>
+ <div class="well well-lg">
+ 	<div class="article-title">
+ 		<%= article.title %>
+	</div>
+	<div class="article-body">
+		<%= article.body %>
+	</div>
+ </div>
+<% end %>
