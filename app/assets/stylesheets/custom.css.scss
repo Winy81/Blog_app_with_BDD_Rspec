@@ -71,8 +71,33 @@ body {
 //
 // }
 
+.detail-article{
+  background-color: white;
+  padding-left: 10px;
+}
+
 .article-detail {
   margin-top: 20px;
+  background-color: white;
   color: #0000ff;
+}
+
+.article-detail-title {
+  font-size: 1.5em;
+  margin-bottom: 40px;
+}
+
+.article-show-body {
+  padding-left: 0em;
+  margin-top: 15px;
+  color: black;
+}
+
+.edit-delete {
+  margin-top: 20px;
+}
+
+#article-date{
+  float: right;
 }
 
