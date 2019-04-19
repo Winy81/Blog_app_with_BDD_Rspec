@@ -13,6 +13,7 @@ RSpec.feature "Showing an Article" do
 
 		expect(page).to have_content(@article.title)
 		expect(page).to have_content(@article.body)
+		expect(page).to have_content(@article.created_at.strftime("%b %d %Y"))
 		expect(page.current_path).to eq(article_path(@article))
 	end
 

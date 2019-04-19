@@ -1,0 +1,8 @@
+<article class="detail-article">
+	<h1>Article#show</h1>
+	<h2 class="article-detail-title"><%= @article.title %></h2>
+    <p><%= @article.body %></p>
+    <div class="glyphicon glyphicon-calender" id="article-date">
+    	<%= @article.created_at.strftime("%b %d %Y") %><!-- strftime => method for string format time -->
+    </div>
+</articles>
