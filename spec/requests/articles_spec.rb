@@ -20,7 +20,7 @@ RSpec.describe "Articles", type: :request do
 			before { get "/articles/radnom_not_exist"}
 
 			it 'has handle non-existing article' do 
-				expect(response.status).to eq(400)
+				expect(response.status).to eq(302)
 				flash_message = "The article couldn't be found"
 				expect(flash[:alert]).to eq(flash_message)
 			end
