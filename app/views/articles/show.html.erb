@@ -6,4 +6,6 @@
     <div class="glyphicon glyphicon-calender" id="article-date">
     	<%= @article.created_at.strftime("%b %d %Y") %><!-- strftime => method for string format time -->
     </div>
+
+    <%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-primary btn-md btn-space" %>
 </articles>
