@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   
+  before_action :set_article, only:[:show,:edit,:update,:destroy] #filtering @article = Article.find(params[:id]) line of code what is includeed, :show,:edit,:update,:destroy action. We can setup a method for them to keep the code DRY
+
   def index
   	@articles = Article.all
   end
@@ -20,15 +22,15 @@ class ArticlesController < ApplicationController
   end
 
   def show
-  	@article = Article.find(params[:id])
+  	#@article = Article.find(params[:id]) setup as before action with set article method
   end
 
   def edit
-  	@article = Article.find(params[:id])
+  	#@article = Article.find(params[:id]) setup as before action with set article method
   end
 
   def update 
-  	@article = Article.find(params[:id])
+  	#@article = Article.find(params[:id]) setup as before action with set article method
   	if @article.update(article_params)
   		flash[:success] = "Article has been updated"
   		redirect_to article_path(@article)
@@ -39,7 +41,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-	@article = Article.find(params[:id]) 
+	#@article = Article.find(params[:id]) setup as before action with set article method
 	if @article.destroy
 		flash[:success] = "Article has been deleted."
 		redirect_to articles_path
@@ -55,6 +57,10 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def set_article
+  	@article = Article.find(params[:id])
+  end
 
   def article_params
   	params.require(:article).permit(:title,:body)
