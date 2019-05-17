@@ -12,4 +12,14 @@ RSpec.feature "User sign up" do
  		expect(page).to have_content("You have signed up successfully.") 
 	end
 
+	scenario "with invlaid credentials" do 
+		visit "/"
+		click_link "Sign up"
+		fill_in "Email", with: ""
+ 		fill_in "Password", with: ""
+ 		fill_in "Password confirmation", with: "" 
+ 		click_button "Sign up"
+ 		expect(page).to have_content("You have not signed up successfully.") 
+	end
+
 end
