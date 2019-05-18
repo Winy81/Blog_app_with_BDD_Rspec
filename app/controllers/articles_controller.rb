@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  
+  #before_action :authenticate_user!, except: [:index, :show]
   before_action :set_article, only:[:show,:edit,:update,:destroy] #filtering @article = Article.find(params[:id]) line of code what is includeed, :show,:edit,:update,:destroy action. We can setup a method for them to keep the code DRY
 
   def index
