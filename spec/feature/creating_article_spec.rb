@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.feature "Creating Articles" do
+
+	before do 
+		@john = User.create(email: "john@test.com", password: "password")
+		login_as(@john) #support method by devise
+	end
+
 	scenario "A user creates a new article" do
 		visit "/" #root path
 		click_link "New Article"
