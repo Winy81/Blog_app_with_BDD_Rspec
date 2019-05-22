@@ -1,14 +1,13 @@
-<h1>Article#show</h1>
-
 <article class="detail-article">
 	<h3 class="article-detail-title"><%= @article.title %></h3>
     <p><%= @article.body %></p>
     <div class="glyphicon glyphicon-calender" id="article-date">
     	<%= @article.created_at.strftime("%b %d %Y") %><!-- strftime => method for string format time -->
     </div>
-
-    <%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-primary btn-md btn-space" %>
-    <%= link_to "Delete Article", article_path(@article), method: :delete,
+    <% if user_signed_in? && current_user == @article.user %>
+    	<%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-primary btn-md btn-space" %>
+    	<%= link_to "Delete Article", article_path(@article), method: :delete,
 		                                                  data: { confirm: "Are you sure you want to delete article?" }, 
                                                           class: "btn btn-primary btn-lg btn-space" %>
+     <% end %>                                              
 </articles>
