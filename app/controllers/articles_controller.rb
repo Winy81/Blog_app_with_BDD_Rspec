@@ -27,6 +27,10 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    unless @article.user == current_user
+      flash[:alert] = "You can only edit your own article."
+      redirect_to root_path
+    end
   	#@article = Article.find(params[:id]) setup as before action with set article method
   end
 
