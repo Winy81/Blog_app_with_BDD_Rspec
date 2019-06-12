@@ -34,15 +34,20 @@ class ArticlesController < ApplicationController
   	#@article = Article.find(params[:id]) setup as before action with set article method
   end
 
-  def update 
-  	#@article = Article.find(params[:id]) setup as before action with set article method
-  	if @article.update(article_params)
-  		flash[:success] = "Article has been updated"
-  		redirect_to article_path(@article)
-  	else
-  		flash.now[:danger] = "Article has not been updated"
-  		render :edit #or edit_path
-  	end
+  def update
+    unless @article.user == current_user
+      flash[:danger] = "You can only edit your own article"
+      redirect_to root_path   
+    else
+  	  #@article = Article.find(params[:id]) setup as before action with set article method
+  	  if @article.update(article_params)
+  		  flash[:success] = "Article has been updated"
+  		  redirect_to article_path(@article)
+  	  else
+  		  flash.now[:danger] = "Article has not been updated"
+  		  render :edit #or edit_path
+  	  end
+    end
   end
 
   def destroy
