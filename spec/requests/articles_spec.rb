@@ -78,5 +78,15 @@ RSpec.describe "Articles", type: :request do
         		expect(flash[:success]).to eq flash_message
 			end
 		end
+
+		context 'with non signed in user' do
+     		before { delete "/articles/#{@article.id}"}
+
+     		it 'redirects to the sign in page' do
+       			 expect(response.status).to eq 302
+       			 flash_message = "You need to sign in or sign up before continuing."
+       			 expect(flash[:alert]).to eq flash_message
+       		end
+     	end
 	end
 end
