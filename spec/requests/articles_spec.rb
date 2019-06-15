@@ -65,5 +65,18 @@ RSpec.describe "Articles", type: :request do
         		expect(flash[:danger]).to eq flash_message
       		end
 		end
+
+		context 'with signed in users who are owners' do 
+			before do
+				login_as(@john)
+				delete "/articles/#{@article.id}" 
+			end
+
+			it 'successfully delete article' do
+				expect(response.status).to eq 302
+        		flash_message = "Article has been deleted."
+        		expect(flash[:success]).to eq flash_message
+			end
+		end
 	end
 end
