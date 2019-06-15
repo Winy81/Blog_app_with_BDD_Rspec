@@ -52,10 +52,19 @@ class ArticlesController < ApplicationController
 
   def destroy
 	#@article = Article.find(params[:id]) setup as before action with set article method
-	if @article.destroy
-		flash[:success] = "Article has been deleted."
-		redirect_to articles_path
-	end
+	  if signed_in? 
+        unless @article.user == current_user
+          flash[:danger] = "You can only delete your own article!"
+          redirect_to root_path 
+        else 
+          @article.destroy
+		      flash[:success] = "Article has been deleted."
+		      redirect_to articles_path
+	      end
+    else
+      flash[:alert] = "You need to sign in or sign up before continuing."
+      redirect_to root_path
+    end 
   end
 
   protected
