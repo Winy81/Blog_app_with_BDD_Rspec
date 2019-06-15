@@ -50,4 +50,20 @@ RSpec.describe "Articles", type: :request do
 			end
 		end
 	end
+
+
+	describe 'GET GET /articles/:id' do
+		context 'with signed in users who are non-owners' do 
+			before do
+				login_as(@jane)
+				delete "/articles/#{@article.id}" 
+			end
+
+			it 'redirects to the homepage' do
+        		expect(response.status).to eq 302
+        		flash_message = "You can only delete your own article!"
+        		expect(flash[:danger]).to eq flash_message
+      		end
+		end
+	end
 end
