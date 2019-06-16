@@ -6,8 +6,33 @@
     </div>
     <% if user_signed_in? && current_user == @article.user %>
     	<%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-primary btn-md btn-space" %>
-    	<%= link_to "Delete Article", article_path(@article), method: :delete,
-		                                                  data: { confirm: "Are you sure you want to delete article?" }, 
-                                                          class: "btn btn-primary btn-lg btn-space" %>
-     <% end %>                                              
+    	<%= link_to "Delete Article", article_path(@article), method: :delete, data: { confirm: "Are you sure you want to delete article?" }, class: "btn btn-primary btn-lg btn-space" %>
+     <% end %>
+
+     </hr>
+
+     <div class="col-md-10">
+     	<%= form_for [@article, @comment],
+     		:html => {class: "form-horizontal", role: "form"} do |f| %>
+     		<% if @comments.errors.any? %>
+     		  <div class="panel panel-danger col-md-offset-1">
+			    <div class="panel-heading"> 
+				  <h2 class="panel-title">
+				  <%= pluralize(@comment.errors.count, "error") %>prohibited this comment from being saved: 
+				  </h2>
+				  <div>
+				  	<ul>
+				  	  <% @comments.errors.full_messages.each do |msg| %>
+				  	    <li>
+				  	      <%= msg %>
+				  	    </li>
+				  	  <% end %>	
+				  	</ul>	
+				  </div>
+			    </div>
+		      </div>
+     	    <% end %>
+     	<% end %>   
+     </div>
+
 </articles>
