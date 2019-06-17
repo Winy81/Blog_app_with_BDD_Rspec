@@ -6,15 +6,16 @@
     </div>
     <% if user_signed_in? && current_user == @article.user %>
     	<%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-primary btn-md btn-space" %>
-    	<%= link_to "Delete Article", article_path(@article), method: :delete, data: { confirm: "Are you sure you want to delete article?" }, class: "btn btn-primary btn-lg btn-space" %>
+    	<%= link_to "Delete Article", article_path(@article), method: :delete, data: { confirm: "Are you sure you want to delete article?" }, class: "btn btn-primary btn-md btn-space" %>
      <% end %>
 </articles>
-     </hr>
+
+<hr>
 
 <div class="col-md-10">
 	<%= form_for [@article, @comment],
 		:html => {class: "form-horizontal", role: "form"} do |f| %>
-		<% if @comments.errors.any? %>
+		<% if @comment.errors.any? %>
 		  <div class="panel panel-danger col-md-offset-1">
 	    <div class="panel-heading"> 
 		  <h2 class="panel-title">
@@ -22,7 +23,7 @@
 		  </h2>
 		  <div>
 		  	<ul>
-		  	  <% @comments.errors.full_messages.each do |msg| %>
+		  	  <% @comment.errors.full_messages.each do |msg| %>
 		  	    <li>
 		  	      <%= msg %>
 		  	    </li>
@@ -32,7 +33,8 @@
 	    </div>
       </div>
 	    <% end %>
-
+</br>
+</br>
 	    <div class="form-group">
 	      <div class="control-label col-md-2">
 	      	<%= f.label :body, 'New Comment' %>
@@ -50,25 +52,28 @@
 </div>
 
 <div class="col-md-12">
+	</br>
+    </br>
 	<header>
 	  <h2>Comments</h2>	
 	</header>
 
 	<div class="col-md-10">
 	  <% if @article.comments.any? %>
-	  	<% presisted_comments(@comments).each do |comment| %>
+	    <%-# presisted_comments helper method in article helper -%>
+	  	<% presisted_comments(@comments).each do |comment| %> 
 	  	<div class="comment-body">
 	      <%= comment.body %>
 	  	</div>
 
 	  	<div class="comment-time">
-	  	  <%= time_ago_in _words(comment.created_at) %>
-	  	  ago by <%= comment.user.email %>
+	  	  <small><%= time_ago_in_words(comment.created_at) %>
+	  	  ago by <%= comment.user.email %></small>
 	  	</div>
-	    </hr>
+	    <hr>
 	    <% end %>
 	  <% else %>
-	  	There Are no comments to show.
+	  	<p>There Are no comments to show.</p>
 	  <% end %>
 	</div>
 </div>
