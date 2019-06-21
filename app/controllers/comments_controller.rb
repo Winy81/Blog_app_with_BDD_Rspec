@@ -11,10 +11,11 @@ class CommentsController < ApplicationController
 		@comment.user = current_user
 		  if @comment.save
 		    flash[:notice] = "Comment has been created"
+		    redirect_to article_path(@article)
 		  else
 		  	flash.now[:alert] = "Comment hasn't been created"
+		  	redirect_to article_path(@article)
 		  end
-		  redirect_to article_path(@article)
 	  end
 	end
 
