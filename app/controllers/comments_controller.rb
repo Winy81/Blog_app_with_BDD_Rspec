@@ -10,6 +10,8 @@ class CommentsController < ApplicationController
 		@comment = @article.comments.new(comment_params)
 		@comment.user = current_user
 		  if @comment.save
+		  	ActionCable.server.boradcast "comments",
+		  	  render(partial: 'comments/comment', object: @comment)
 		    flash[:notice] = "Comment has been created"
 		    redirect_to article_path(@article)
 		  else
