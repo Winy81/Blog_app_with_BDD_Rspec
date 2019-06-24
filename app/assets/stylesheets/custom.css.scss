@@ -74,7 +74,7 @@ body {
 
 .detail-article{
   background-color: #f8f8f8;
-  padding-left: 10px;
+  padding: 1px 10px 0px 15px;
 }
 
 .article-detail {
@@ -106,6 +106,7 @@ body {
 
 #article-date{
   float: right;
+  margin-left:10px;
 }
 
 // Devise Error Messages 

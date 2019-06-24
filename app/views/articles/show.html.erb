@@ -59,7 +59,7 @@
 	</header>
 
 	<div class="col-md-10">
-	  <% if @article.comments.any? %>
+	  <% if @article.comments.count != 0 %>
 	  <div id="messages">
 	    <%-# presisted_comments helper method in article helper -%>
 	  	<% presisted_comments(@comments).each do |comment| %> 
