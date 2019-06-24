@@ -8,4 +8,20 @@ RSpec.feature "Delete comment" do
 		@comment_1 = @article.comments.create(body: "first comment")
 		@comment_2 = @article.comments.create(body: "sec comment")
 	end
+
+	scenario "delete only last comment created by Current user" do
+		login_as(@jane)
+
+		visit "/"
+
+		click_link @article.title
+		comment_jane_1 = @article.comments.create(body: "first comment by jane")
+		comment_jane_2 = @article.comments.create(body: "sec comment by jane")
+		click_button "Delete Comment"
+		expect(page).to have_content(@comment_1) 
+		expect(page).to have_content(@comment_2)
+		expect(page).to have_content(comment_jane_1)
+		expect(page).not_to have_content(comment_jane_2)
+		expect(current_path).to eq(article_path(@article))
+	end 
 end
