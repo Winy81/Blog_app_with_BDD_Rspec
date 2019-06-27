@@ -20,9 +20,10 @@ class CommentsController < ApplicationController
 	  end
 	end
 
-	def delete
-	  @comment = @article.comments.last
+	def destroy
+	  @comment = @article.comments.find(params[:id])
 	  @comment.destroy
+	  redirect_to article_path(@article)
 	end
 
 	private

@@ -14,9 +14,6 @@ RSpec.feature "Delete comment" do
 
 		visit "/"
 
-		@comment = @article.comments.last
-		puts @comment
-
 		click_link @article.title
 		comment_jane_1 = @article.comments.create(body: "first comment by jane")
 		comment_jane_2 = @article.comments.create(body: "sec comment by jane")

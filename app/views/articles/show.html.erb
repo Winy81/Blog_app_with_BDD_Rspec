@@ -63,19 +63,23 @@
 	  <div id="messages">
 	    <%-# presisted_comments helper method in article helper -%>
 	  	<% presisted_comments(@comments).each do |comment| %> 
-	  	<div class="comment-body">
-	      <%= comment.body %>
-	  	</div>
+	  	  <div class="comment-body">
+	        <%= comment.body %>
+	  	  </div>
 
-	  	<div class="comment-time">
-	  	  <small><%= time_ago_in_words(comment.created_at) %>
-	  	  ago by <%= comment.user.email %></small>
-	  	</div>
-	    <hr>
+	  	  <div class="comment-time">
+	  	    <small><%= time_ago_in_words(comment.created_at) %>
+	  	    ago by <%= comment.user.email %></small>
+	  	  </div>
+	      <hr>
+	      <div>
+	  	    <%= link_to "Remove My Last Comment", article_comment_path(@article, comment), method: :delete, data: { confirm: "Are you sure you want to delete your last comment?" }, class: "btn btn-danger btn-md btn-space" %>
+	        </div>
 	    <% end %>
 	    </div>
 	  <% else %>
 	  	<p>There Are no comments to show.</p>
 	  <% end %>
+	</br>
 	</div>
 </div>
