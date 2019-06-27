@@ -37,4 +37,20 @@ RSpec.describe "Comments", type: :request do
 		end
 	end
 
+	describe 'DELETE /articles/:id/comments' do
+		context 'delete comment by owner' do
+		  before do
+			login_as(@jane)
+			@comment = @article.comments.create!(body: "test comment", user: @john)	 
+		  end
+
+		  it "deletes the comment successfully" do
+		  	delete "/articles/#{@article.id}/comments/#{@comment.id}"
+			flash_message = "Comment has been deleted"
+			expect(response.status).to eq 204 
+			expect(flash[:notice]).to eq flash_message
+		  end
+		end
+	end 
+
 end

@@ -20,10 +20,13 @@ class CommentsController < ApplicationController
 	  end
 	end
 
-	def destroy
+	def destroy		
 	  @comment = @article.comments.find(params[:id])
-	  @comment.destroy
-	  redirect_to article_path(@article)
+	  if @comment.user.id == current_user.id
+	  	@comment.destroy
+	  	flash[:notice] = "Comment has been deleted"
+	  	redirect_to article_path(@article)
+	  end
 	end
 
 	private

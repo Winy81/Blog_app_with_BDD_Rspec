@@ -31,11 +31,11 @@ RSpec.feature "Delete comment" do
 		click_link @article.title
 
 		@comment_2 = @article.comments.create!(body: "second comment", user: @john)	
-		
+
 		click_on("Remove Comment",match: :first)
 		expect(page).not_to have_content(@comment_1.body)
 		expect(page).to have_content(@comment_2.body)
-		expect(page).not_to have_content("Remove Comment")
+		expect(page).not_to have_button("Remove Comment")
 		expect(current_path).to eq(article_path(@article))
 	end
 
