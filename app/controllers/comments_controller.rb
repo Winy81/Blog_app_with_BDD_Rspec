@@ -20,6 +20,11 @@ class CommentsController < ApplicationController
 	  end
 	end
 
+	def delete
+	  @comment = @article.comments.last
+	  @comment.destroy
+	end
+
 	private
 	  def comment_params
 	  	params.require(:comment).permit(:body)
