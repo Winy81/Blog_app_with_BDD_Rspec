@@ -8,7 +8,7 @@
 	<h1 id="no-articles">No Article Created</h1>
 <% else %>
   <% @articles.each do |article| %>
-	<div class="well well-lg">
+	<div class="well well-lg" style="background-color: #f8f8f8">
    	   <div class="article-title">
    	   	 <%= link_to article.title, article_path(article) %>
   	   </div>
