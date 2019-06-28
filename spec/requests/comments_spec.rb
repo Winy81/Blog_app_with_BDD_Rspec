@@ -65,6 +65,21 @@ RSpec.describe "Comments", type: :request do
 			expect(flash[:alert]).to eq flash_message
 		  end
 		end
+
+		context 'with a non-comment creator user in user' do
+		  before do
+		  	login_as(@jane)
+			@comment = @article.comments.create!(body: "test comment", user: @john)
+			delete "/articles/#{@article.id}/comments/#{@comment.id}"	 
+		  end
+
+		  it "redirects user to the signin page" do 
+			flash_message = "You have permition to delete just your own comment"
+			expect(response).to redirect_to(article_path(@article)) 
+			expect(response.status).to eq 302 
+			expect(flash[:alert]).to eq flash_message
+		  end
+		end
 	end 
 
 end

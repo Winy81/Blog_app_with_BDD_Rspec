@@ -29,8 +29,10 @@ class CommentsController < ApplicationController
 	      if @comment.user.id == current_user.id
 	  	    @comment.destroy
 	  	    flash[:notice] = "Comment has been deleted"
-	  	    redirect_to article_path(@article)
+	  	  else
+	  	  	flash[:alert] = "You have permition to delete just your own comment"
 	      end
+	      redirect_to article_path(@article)
 	  end
 	end
 
