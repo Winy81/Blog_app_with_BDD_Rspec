@@ -54,7 +54,8 @@ RSpec.describe "Comments", type: :request do
 
 		context 'with a non-signed in user' do
 		  before do
-			@comment = @article.comments.create!(body: "test comment", user: @john)	 
+			@comment = @article.comments.create!(body: "test comment", user: @john)
+			delete "/articles/#{@article.id}/comments/#{@comment.id}"	 
 		  end
 
 		  it "redirects user to the signin page" do 

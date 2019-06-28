@@ -20,12 +20,17 @@ class CommentsController < ApplicationController
 	  end
 	end
 
-	def destroy		
-	  @comment = @article.comments.find(params[:id])
-	  if @comment.user.id == current_user.id
-	  	@comment.destroy
-	  	flash[:notice] = "Comment has been deleted"
-	  	redirect_to article_path(@article)
+	def destroy
+	  unless signed_in?
+	  	flash[:alert] = "Please sign in or sign up first"
+	  	redirect_to new_user_session_path
+	  else		
+	    @comment = @article.comments.find(params[:id])
+	      if @comment.user.id == current_user.id
+	  	    @comment.destroy
+	  	    flash[:notice] = "Comment has been deleted"
+	  	    redirect_to article_path(@article)
+	      end
 	  end
 	end
 
