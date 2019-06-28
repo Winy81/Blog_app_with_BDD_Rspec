@@ -40,15 +40,28 @@ RSpec.describe "Comments", type: :request do
 	describe 'DELETE /articles/:id/comments' do
 		context 'delete comment by owner' do
 		  before do
-			login_as(@jane)
+			login_as(@john)
 			@comment = @article.comments.create!(body: "test comment", user: @john)	 
 		  end
 
 		  it "deletes the comment successfully" do
 		  	delete "/articles/#{@article.id}/comments/#{@comment.id}"
 			flash_message = "Comment has been deleted"
-			expect(response.status).to eq 204 
+			expect(response.status).to eq 302
 			expect(flash[:notice]).to eq flash_message
+		  end
+		end
+
+		context 'with a non-signed in user' do
+		  before do
+			@comment = @article.comments.create!(body: "test comment", user: @john)	 
+		  end
+
+		  it "redirects user to the signin page" do 
+			flash_message = "Please sign in or sign up first"
+			expect(response).to redirect_to(new_user_session_path) 
+			expect(response.status).to eq 302 
+			expect(flash[:alert]).to eq flash_message
 		  end
 		end
 	end 
